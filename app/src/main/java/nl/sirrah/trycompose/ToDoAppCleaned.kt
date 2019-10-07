@@ -1,4 +1,4 @@
-package nl.sirrah.trycompose
+package nl.sirrah.trycompose.todo.cleanedup
 
 import androidx.compose.*
 import androidx.lifecycle.MutableLiveData
@@ -42,7 +42,7 @@ data class ToDoList(var items: List<ToDoItem>) {
 }
 
 @Composable
-fun ToDoApp() {
+fun ToDoAppCleanedUp() {
     val data = +memo {
         ToDoList(
             listOf(
@@ -84,42 +84,67 @@ fun <T> SimpleListAdapter(
 
 @Composable
 fun ToDoItem(item: ToDoItem, onCheckedChange: (Boolean) -> Unit) {
+    val color = +colorFor(item)
+
+    MyCard(color) {
+        MyToggle(
+            description = item.description,
+            checked = item.completed,
+            color = color,
+            onCheckedChange = onCheckedChange
+        )
+    }
+}
+
+private fun colorFor(item: ToDoItem): Effect<Color> {
+    return themeColor {
+        if (item.completed) primary else secondary
+    }
+}
+
+@Composable
+fun MyCard(color: Color, block: @Composable() () -> Unit) {
     Card(
         shape = RoundedCornerShape(20.px),
-        border = Border(+themeColor {
-            if (item.completed) primary
-            else secondary
-        }, 1.dp),
+        border = Border(color, 1.dp),
         elevation = 4.dp
     ) {
-        Row(
-            mainAxisAlignment = SpaceBetween,
-            crossAxisAlignment = Center
-        ) {
-            // Not all elements have a 'modifier' property yet
-            // so use the old form of Padding
-            Padding(left = 4.dp, right = 8.dp) {
-                Checkbox(
-                    checked = item.completed,
-                    onCheckedChange = onCheckedChange
-                )
-            }
-            Text(
-                text = item.description,
-                style = +themeTextStyle {
-                    TextStyle(
-                        fontFamily = FontFamily("Roboto"),
-                        fontWeight = FontWeight.normal,
-                        color = +themeColor {
-                            if (item.completed) primary
-                            else secondary
-                        },
-                        fontSize = 32.sp
-                    )
-                },
-                paragraphStyle = ParagraphStyle(TextAlign.Center),
-                modifier = padding(4.dp)
+        block()
+    }
+}
+
+val defaultTextStyle = TextStyle(
+    fontFamily = FontFamily("Roboto"),
+    fontWeight = FontWeight.normal,
+    fontSize = 32.sp
+)
+
+@Composable
+fun MyToggle(
+    description: String,
+    checked: Boolean,
+    color: Color,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Row(
+        mainAxisAlignment = SpaceBetween,
+        crossAxisAlignment = Center
+    ) {
+        // Not all elements have a 'modifier' property yet
+        // so use the old form of Padding
+        Padding(left = 4.dp, right = 8.dp) {
+            Checkbox(
+                checked = checked,
+                onCheckedChange = onCheckedChange
             )
         }
+        Text(
+            text = description,
+            style = +themeTextStyle {
+                defaultTextStyle.copy(color = color)
+            },
+            paragraphStyle = ParagraphStyle(TextAlign.Center),
+            modifier = padding(4.dp)
+        )
     }
 }

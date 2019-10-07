@@ -12,6 +12,7 @@ import androidx.ui.layout.*
 import androidx.ui.material.*
 import androidx.ui.text.ParagraphStyle
 import androidx.ui.text.style.TextAlign.Center
+import nl.sirrah.trycompose.todo.cleanedup.ToDoAppCleanedUp
 
 class MainActivity : AppCompatActivity() {
 
