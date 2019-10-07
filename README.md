@@ -1,4 +1,11 @@
-# Try Jetpack Compose now!
+# Jetpack Compose
+
+This is a presentation for the [Kotlin User Group Munich meetup](https://www.meetup.com/Kotlin-User-Group-Munich/).
+This repository adds a few basic examples to demonstrate how Jetpack Compose works.
+
+The project is based on the very helpful [try-compose](https://github.com/Mishkun/try-compose) repository by [Mikhail Levchenko](https://github.com/Mishkun).
+
+## Try Jetpack Compose now!
 
 This repository was made to provide a quick dive into what Jetpack Compose feels like. No need to checkout and AOSP and build everything by yourself, main job is done for you.
 
