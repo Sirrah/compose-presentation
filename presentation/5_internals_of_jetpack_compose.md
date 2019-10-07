@@ -10,9 +10,6 @@
         are not yet available 
     -> Will be a long time before Compose is ready for production
     
-- Use `@Composable` and `@GenerateView` to hook into regular View
-    hierarchy
-    
 - Everything is a component: `Button`, `Text` but also `Align`
     and `Padding`
     -> Very convoluted view hierarchies
