@@ -28,7 +28,12 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     fun HelloWorld() {
-        Text("Hello World!")
+        Column {
+            Text(text = "Hello World!")
+            Button(text = "Click me", onClick = {
+                Log.d(TAG, "Clicked")
+            })
+        }
     }
 
     @Composable
